@@ -2,7 +2,11 @@
 pipeline {
 
   agent any
-  
+
+	environment {
+        PATH = "/usr/bin/:/usr/bin/ansible-playbook:$PATH"
+        ANS_HOME = tool('ansible')
+     }
   parameters {
 	choice(name: 'action', choices: 'create\nrollback', description: 'Create/rollback of the deployment')
     string(name: 'ImageName', description: "Name of the docker build", defaultValue: "kubernetes-configmap-reload")
